@@ -1,8 +1,8 @@
 package repositorios;
 
 public class Uds {
-
-	private int cod_especialidade;
+	
+	private int id;
 	private int cod_tipo;
 	private String nome;
 	private String rua;
@@ -10,19 +10,25 @@ public class Uds {
 	private int numero;
 	private String bairro;
 	
-	private int id;
+	public Uds (int id, int cod_tipo, String nome,String rua,String cidade, int numero, String bairro) {
+		this.id = id;
+		this.cod_tipo = cod_tipo;
+		this.nome = nome;
+		this.rua = rua;
+		this.cidade = cidade;
+		this.numero = numero;
+		this.bairro = bairro;
+	}
+	
+	public Uds () {
+		
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getCod_especialidade() {
-		return cod_especialidade;
-	}
-	public void setCod_especialidade(int cod_especialidade) {
-		this.cod_especialidade = cod_especialidade;
-	}
+	}	
 	public int getCod_tipo() {
 		return cod_tipo;
 	}

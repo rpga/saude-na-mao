@@ -2,6 +2,7 @@ package com.example.helth;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,13 +19,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity /*implements AdapterView.OnItemSelectedListener*/ {
-
+	private static final String TAG = "QuickNotesMainActivity";
+	
+	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+                    
         ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);    
         imageButton1.setOnClickListener(new View.OnClickListener() {
 		    
@@ -35,6 +38,7 @@ public class MainActivity extends Activity /*implements AdapterView.OnItemSelect
                       Especialidade.class);
 
                 startActivity(intent);
+        		Log.d(TAG,"mensagem de debug");
 
                 //finish();
             }

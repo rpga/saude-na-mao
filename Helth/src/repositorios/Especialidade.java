@@ -4,6 +4,15 @@ public class Especialidade {
 	private int id;
 	private String nome;
 	
+	public Especialidade (int id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
+	
+	public Especialidade () {
+		
+	}
+	
 	public int getId() {
 		return id;
 	}

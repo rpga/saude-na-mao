@@ -24,7 +24,7 @@ public class Localidade extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_localidade);
 		ListView listView = (ListView) findViewById(R.id.lv);
-		setTextFilterEnable(true);
+		//setTextFilterEnable(true);
 	/*
 		String [] localidades = new String [] {
 			"Dois Unidos", "Boa Viagem", "Alto da Favela"

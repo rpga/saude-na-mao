@@ -4,6 +4,15 @@ public class Tipo {
 	private int id;
 	private String nome;
 	
+	public Tipo (int id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
+	
+	public Tipo () {
+		
+	}
+	
 	public int getId() {
 		return id;
 	}

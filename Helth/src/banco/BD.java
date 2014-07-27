@@ -20,7 +20,85 @@ public class BD {
 		BDCore auxBd = new BDCore(context);
 		bd = auxBd.getWritableDatabase();
 	}
+	
 	//inserindo atributos no banco
+	public void povoarTipo () {
+		//criando os tipos
+		Tipo t1 = new Tipo(1, "Hospital");
+		Tipo t2 = new Tipo(2, "UPA");
+		Tipo t3 = new Tipo(3, "Clínica");
+		
+		//Executando o comando de inserir 
+		inserir(t1);
+		inserir(t2);
+	}
+	
+	public void povoarEspecialidade () {
+		Especialidade e1 = new Especialidade(1,"Angiologia");
+		Especialidade e2 = new Especialidade(2,"Alergologia");
+		Especialidade e3 = new Especialidade(3,"Broncoscopia");
+		Especialidade e4 = new Especialidade(4,"Cardiologia");
+		Especialidade e5 = new Especialidade(5,"Clínica Médica");
+		Especialidade e6 = new Especialidade(6,"Cirurgia");
+		Especialidade e7 = new Especialidade(7,"Colposcopia");
+		Especialidade e8 = new Especialidade(8,"Endocrinologia");
+		Especialidade e9 = new Especialidade(9,"Neurologia");
+		Especialidade e10 = new Especialidade(10,"Obstetrícia");
+		
+		inserir(e1);
+		inserir(e2);
+		inserir(e3);
+		inserir(e4);
+		inserir(e5);
+		inserir(e6);
+		inserir(e7);
+		inserir(e8);
+		inserir(e9);
+		inserir(e10);		
+	}
+	
+	public void povoarUds () {
+		Uds u1 = new Uds(1,1, "Hospital Agamenon Magalhãe","Estrada Do Arraial", "Recife",2723,"Casa Amarela");
+		Uds u2 = new Uds(2,1,"Hospital Da Restauração","AV. Agamenon Magalhaes", "Recife",0,"Derby");
+				
+		inserir(u1);
+		inserir(u2);
+	}
+	
+	public void povoarPossui() {
+		Possui p1 = new Possui(1,3);
+		Possui p2 = new Possui(1,4);
+		Possui p3 = new Possui(1,5);
+		Possui p4 = new Possui(1,6);
+		Possui p5 = new Possui(1,7);
+		Possui p6 = new Possui(2,3);
+		Possui p7 = new Possui(2,5);
+		Possui p8 = new Possui(2,10);
+		Possui p9 = new Possui(2,6);
+		Possui p10 = new Possui(2,8);
+		
+		inserir(p1);
+		inserir(p2);
+		inserir(p3);
+		inserir(p4);
+		inserir(p5);
+		inserir(p6);
+		inserir(p7);
+		inserir(p8);
+		inserir(p9);
+		inserir(p10);		
+	}
+	
+	public void povoarTelefone () {
+		Telefone t1 = new Telefone(1,"31841600");
+		Telefone t2 = new Telefone(1,"08002812025");
+		Telefone t3 = new Telefone(2,"(81) 3181-5400");
+		
+		inserir(t1);
+		inserir(t2);
+		inserir(t3);
+	}
+	
 	public void inserir(Tipo tipo){
 		ContentValues valor = new ContentValues();
 		valor.put("id", tipo.getId());
@@ -161,7 +239,7 @@ public class BD {
 	}
 	public List<Uds> buscarUds(){
 		List<Uds> list = new ArrayList<Uds>();
-		String [] colunas = new String []{"_id","cod_especialidade", "cod_tipo","nome","rua", "cidade","numero", "bairro" };
+		String [] colunas = new String []{"_id","cod_tipo","nome","rua", "cidade","numero", "bairro" };
 		Cursor cursor = bd.query("uds", colunas, null,null, null, null, "nome ASC");
 		
 		if(cursor.getCount() > 0){
@@ -169,14 +247,13 @@ public class BD {
 			
 			do{
 				Uds u = new Uds();
-				u.setId(cursor.getInt(0));
-				u.setCod_especialidade(cursor.getInt(1));
-				u.setCod_tipo(cursor.getInt(2));
-				u.setNome(cursor.getString(3));
-				u.setRua(cursor.getString(4));
-				u.setCidade(cursor.getString(5));
-				u.setNumero(cursor.getInt(6));
-				u.setBairro(cursor.getString(7));
+				u.setId(cursor.getInt(0));				
+				u.setCod_tipo(cursor.getInt(1));
+				u.setNome(cursor.getString(2));
+				u.setRua(cursor.getString(3));
+				u.setCidade(cursor.getString(4));
+				u.setNumero(cursor.getInt(5));
+				u.setBairro(cursor.getString(6));
 				
 				list.add(u);
 				
@@ -196,7 +273,7 @@ public class BD {
 			do{
 				Telefone te = new Telefone();
 				te.setId(cursor.getInt(0));
-				te.setTelefone(cursor.getInt(1));
+				te.setTelefone(cursor.getString(1));
 				list.add(te);
 				
 			}while(cursor.moveToNext());
