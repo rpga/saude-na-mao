@@ -1,6 +1,8 @@
 package com.example.helth;
 
+import banco.BD;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -19,14 +21,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity /*implements AdapterView.OnItemSelectedListener*/ {
-	private static final String TAG = "QuickNotesMainActivity";
-	
-	
-	
+		
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        BD aux= new BD(this);		
+		SQLiteDatabase db = openOrCreateDatabase("Saude", Context.MODE_PRIVATE,null);
+		
+		aux.povoarTipo();
+		aux.povoarEspecialidade();
+		aux.povoarUds();
+		aux.povoarTelefone();
+		aux.povoarPossui();
                     
         ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);    
         imageButton1.setOnClickListener(new View.OnClickListener() {
@@ -37,8 +45,7 @@ public class MainActivity extends Activity /*implements AdapterView.OnItemSelect
                 intent.setClass(MainActivity.this,
                       Especialidade.class);
 
-                startActivity(intent);
-        		Log.d(TAG,"mensagem de debug");
+                startActivity(intent);        		
 
                 //finish();
             }

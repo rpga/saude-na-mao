@@ -1,43 +1,92 @@
 package com.example.helth;
 
-import com.example.helth.MainActivity.SearchFiltro;
+import java.util.ArrayList;
+import java.util.List;
 
+import repositorios.Uds;
+
+import banco.BD;
+
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.MatrixCursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 
 public class Localidade extends Activity {
-
+	//private ListViewAdapter adapter;
+	//BD bd = new BD();
+	//private List<Uds> nome = bd.buscarUds();
+	private Menu menu;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_localidade);
-		ListView listView = (ListView) findViewById(R.id.lv);
-		//setTextFilterEnable(true);
-	/*
+		 
+		/*ArrayList<ListViewObjetos> itens = new ArrayList<ListViewObjetos>();
+	        for (int i = 0; i < 100; i++) {
+	            itens.add(new ListViewObjetos(i, "descricao+" + i, "R$" + i + ",00"));
+	        }
 		String [] localidades = new String [] {
-			"Dois Unidos", "Boa Viagem", "Alto da Favela"
-		};
+				"Dois Unidos", "Boa Viagem", "Alto da Favela"
+			};
+		
+		adapter = new ListViewAdapter(this, localidades);
+		ListView lv = (ListView) findViewById(R.id.lv);
+		lv.setAdapter(adapter);
+		*/
+		/*EditText editText = (EditText) findViewById(R.id.editText1);
+		editText.addTextChangedListener(new TextWatcher(){
+		
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count){
+			adapter.getFilter().filter(s.toString());
+		}
+		@Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                int after) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+		
+		});
+		}
+		
+		/*ListView listView = (ListView) findViewById(R.id.lv);
+		
+	
+		
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, localidades);
 		
 		ListView lv= (ListView) findViewById(R.id.lv);
 		lv.setAdapter(adapter);
-		lv.setOnItemClickListener(chamaLocalidades());*/
-	}
-	
-	public OnItemClickListener chamaLocalidades(){
+		lv.setOnItemClickListener(chamaLocalidades());
+	*/
+}
+	/*public OnItemClickListener chamaLocalidades(){
 		return(new OnItemClickListener(){
 			
 			@Override
@@ -62,49 +111,7 @@ public class Localidade extends Activity {
 			}
 			
 		});
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		SearchView sv = new SearchView(this);
-		sv.setOnQueryTextListener (new SearchFiltro());
-		
-		MenuItem m1 = menu.add(0, 0, 0, "Item 1");
-		m1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		m1.setActionView(sv);
-		
-		
-		return true;
-	}
-
-	private class SearchFiltro implements OnQueryTextListener {
-
-		@Override
-		
-		public boolean onQueryTextSubmit(String query) {
-			Log.i("Script", "onQueryTextSubmit -> "+query);
-			return false;
-		}
-
-		@Override
-		public boolean onQueryTextChange(String newText) {
-			Log.i("Script", "onQueryTextChange -> "+newText);
-			return false;
-		}
-		
-	}
-
-
-	/*@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}*/
-}
+	
+	
+	}
