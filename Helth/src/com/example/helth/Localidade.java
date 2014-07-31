@@ -1,12 +1,13 @@
 package com.example.helth;
 
+import hospitaisPorBairro.HospitaisCAm;
+import hospitaisPorBairro.HospitaisCDU;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
 import repositorios.Uds;
-
 import banco.BD;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.SearchManager;
@@ -33,85 +34,103 @@ import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 
 public class Localidade extends Activity {
-	//private ListViewAdapter adapter;
-	//BD bd = new BD();
-	//private List<Uds> nome = bd.buscarUds();
-	private Menu menu;
 	
+	private String[] lstLocais;
+	private ListView lView;
+	private EditText eText;
+	private ArrayList<String> pesquisa = new ArrayList<String>();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_localidade);
-		 
-		/*ArrayList<ListViewObjetos> itens = new ArrayList<ListViewObjetos>();
-	        for (int i = 0; i < 100; i++) {
-	            itens.add(new ListViewObjetos(i, "descricao+" + i, "R$" + i + ",00"));
-	        }
-		String [] localidades = new String [] {
-				"Dois Unidos", "Boa Viagem", "Alto da Favela"
-			};
 		
-		adapter = new ListViewAdapter(this, localidades);
-		ListView lv = (ListView) findViewById(R.id.lv);
-		lv.setAdapter(adapter);
-		*/
-		/*EditText editText = (EditText) findViewById(R.id.editText1);
-		editText.addTextChangedListener(new TextWatcher(){
+		lView = (ListView) findViewById(R.id.lView);
+		eText = (EditText) findViewById(R.id.eText);
 		
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count){
-			adapter.getFilter().filter(s.toString());
-		}
-		@Override
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                int after) {
-        }
+		lstLocais = new String [] {"Boa Vista","Casa Amarela","Cidade Universitária",
+				"Cordeiro","Curado","Derby","Estância","Graças","Ibura",
+				"Imbiribeira","Iputinga","Nova Descoberta","Parnamirim","Santo Amaro" ,
+				"Tamarineira", "Tejipió" ,"Torre","Torrões", "Várzea"};
+		
+		lView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lstLocais));
+		
+		lView.setOnItemClickListener(new OnItemClickListener() {  
+			  
+            public void onItemClick(AdapterView<?> adapter, View view,  
+                    int posicao, long id) {  
+                Intent intent;
+                switch(posicao){ 
+                case 0: intent = new Intent(getBaseContext(), ListaUDS.class); 
+                startActivity(intent); 
+                break;
+                case 1: intent = new Intent(getBaseContext(), HospitaisCAm.class);
+                startActivity(intent); break; 
+                case 2: intent = new Intent(getBaseContext(), HospitaisCDU.class); 
+                startActivity(intent); 
+                break;
+                }
 
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-		
-		});
-		}
-		
-		/*ListView listView = (ListView) findViewById(R.id.lv);
-		
-	
-		
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, localidades);
-		
-		ListView lv= (ListView) findViewById(R.id.lv);
-		lv.setAdapter(adapter);
-		lv.setOnItemClickListener(chamaLocalidades());
-	*/
-}
-	/*public OnItemClickListener chamaLocalidades(){
-		return(new OnItemClickListener(){
+                Toast.makeText(Localidade.this,  
+                        "Posição Selecionada:" + posicao, Toast.LENGTH_LONG)  
+                        .show();  
+            }  
+        }); 
 			
-			@Override
-			public void onItemClick(AdapterView<?> ld, View v,int position, long id) {
-				Intent intent;
-				switch(position){
-					case 0:
-						intent = new Intent(getBaseContext(), Hospital.class);
-						startActivity(intent);
-						break;
-					case 1:
-						intent = new Intent(getBaseContext(), Hospital.class);
-						startActivity(intent);
-						break;
-					case 2:
-						intent = new Intent(getBaseContext(), Hospital.class);
-						startActivity(intent);
-						break;
-				
-				}
+	
+		Pesquisar();
+		
+		eText.addTextChangedListener(new TextWatcher(){
+			public void afterTextChanged(Editable arg0){
 				
 			}
-			
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3){
+				
+			}
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3){
+				Pesquisar();
+				
+				lView.setAdapter(new ArrayAdapter<String>(Localidade.this, android.R.layout.simple_list_item_1, pesquisa));
+				
+			}
 		});
-	}*/
-	
-	
 	}
+		
+	public void Pesquisar() {
+		int textlength = eText.getText().length();
+		pesquisa.clear();
+
+		for (int i = 0; i < lstLocais.length; i++) {
+			if (textlength <= lstLocais[i].length()) {
+				if (eText
+						.getText()
+						.toString()
+						.equalsIgnoreCase(
+								(String) lstLocais[i]
+										.subSequence(0, textlength))) {
+					pesquisa.add(lstLocais[i]);
+				}
+			}
+		}
+	}
+	
+	@Override
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		return true;
+
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+}

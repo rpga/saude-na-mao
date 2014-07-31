@@ -9,9 +9,19 @@
     tools:context="com.example.helth.Especialidade" 
     android:background="@drawable/marca" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <EditText
+     android:id="@+id/eText3"
+     android:hint="Pesquisar"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_alignParentTop="true"  />
+	
+   <ListView 
+       android:id="@+id/lView"
+       android:layout_below="@id/eText3"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       
+   </ListView>
 
 </RelativeLayout>

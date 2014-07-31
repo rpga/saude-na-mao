@@ -1,8 +1,6 @@
 package com.example.helth;
 
-import banco.BD;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,20 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity /*implements AdapterView.OnItemSelectedListener*/ {
-		
+	
+	
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        BD aux= new BD(this);		
-		SQLiteDatabase db = openOrCreateDatabase("Saude", Context.MODE_PRIVATE,null);
-		
-		aux.povoarTipo();
-		aux.povoarEspecialidade();
-		aux.povoarUds();
-		aux.povoarTelefone();
-		aux.povoarPossui();
                     
         ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);    
         imageButton1.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +36,8 @@ public class MainActivity extends Activity /*implements AdapterView.OnItemSelect
                 intent.setClass(MainActivity.this,
                       Especialidade.class);
 
-                startActivity(intent);        		
-
-                //finish();
+                startActivity(intent);
+        	
             }
         });
         
@@ -66,8 +56,7 @@ public class MainActivity extends Activity /*implements AdapterView.OnItemSelect
         
         ImageButton imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
         imageButton3.setOnClickListener(new View.OnClickListener() {
-        	
-			
+        				
 			@Override
 			public void onClick(View v) {
 			Intent intent = new Intent();
@@ -89,17 +78,14 @@ public class MainActivity extends Activity /*implements AdapterView.OnItemSelect
 			startActivity(intent);
 			}
 		});
-        /*spinner = (Spinner) findViewById(R.id.spinner1);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.Opcao_Busca, android.R.layout.simple_spinner_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);*/
+       
     }
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		
-			SearchView sv = new SearchView(this);
+			/*SearchView sv = new SearchView(this);
 			sv.setOnQueryTextListener (new SearchFiltro());
 			
 			MenuItem m1 = menu.add(0, 0, 0, "Item 1");
@@ -113,7 +99,7 @@ public class MainActivity extends Activity /*implements AdapterView.OnItemSelect
 		return true;
     }
 	
-	public class SearchFiltro implements OnQueryTextListener {
+	/*public class SearchFiltro implements OnQueryTextListener {
 
 		@Override
 		
@@ -128,39 +114,5 @@ public class MainActivity extends Activity /*implements AdapterView.OnItemSelect
 			return false;
 		}
 		
-	}
-
-    //@Override 
-    /*public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    
-	/*@Override
-	public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-		TextView myText= (TextView) view;
-		Toast.makeText(this, "Buscar por: "+myText.getText(), Toast.LENGTH_SHORT).show();
-		
-	}
-
-
-	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void buscaPor(View view){
-		EditText buscaPor = (EditText) findViewById(R.id.editText1);
-		
 	}*/
-	
 }

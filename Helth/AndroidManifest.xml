@@ -37,16 +37,6 @@
             android:name=".Localidade"
             android:background="@drawable/marca"
             android:label="@string/title_activity_localidade" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value="com.example.Localidade" />
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
         <activity
             android:name=".Especialidade"
@@ -63,8 +53,8 @@
             android:label="@string/title_activity_lista_uds" >
         </activity>
         <activity
-            android:name=".Especialidade2"
-            android:label="@string/title_activity_especialidade2" >
+            android:name=".Locais"
+            android:label="@string/title_activity_locais" >
         </activity>
     </application>
 
